@@ -16,7 +16,8 @@ static const char dmenufont[]       = "Sauce Code Pro NF:size=10";
 static const char col_gray1[]       = "#2e3440";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
+//static const char col_gray4[]       = "#eeeeee";
+static const char col_gray4[]       = "#4c566a";
 //static const char col_cyan[]        = "#005577";
 static const char col_cyan[]        = "#81a1c1";
 static const char *colors[][3]      = {
