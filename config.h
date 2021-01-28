@@ -20,10 +20,11 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#4c566a";
 //static const char col_cyan[]        = "#005577";
 static const char col_cyan[]        = "#81a1c1";
+static const char col_red[]         = "#BF616A";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_red,   col_red   },
 };
 
 /* tagging */
@@ -35,12 +36,13 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class          instance    title       tags mask     isfloating   monitor */
-    { "",               NULL,       NULL,       0,            0,           -1 },
-	//{ "Gimp",         NULL,       NULL,       0,            1,           -1 },
-    //{ "Firefox",      NULL,       NULL,       1 << 1,       0,           -1 },
-    //{ "st-256color",  NULL,       NULL,       1 << 0,       0,           -1 },
-    //{ "Pcmanfm",      NULL,       NULL,       1 << 2,       0,           -1 },
+	/* class          instance     title               tags mask     isfloating   monitor */
+    { "",               NULL,       NULL,               0,            0,           -1 },
+    { "",               NULL,       "floatingterminal", 0,            1,           -1 },
+	//{ "Gimp",         NULL,       NULL,               0,            1,           -1 },
+    //{ "Firefox",      NULL,       NULL,               1 << 1,       0,           -1 },
+    //{ "st-256color",  NULL,       NULL,               1 << 0,       0,           -1 },
+    //{ "Pcmanfm",      NULL,       NULL,               1 << 2,       0,           -1 },
 };
 
 /* layout(s) */
@@ -74,6 +76,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *floattermcmd[]  = { "alacritty", "-t", "floatingterminal", NULL };
 static const char *brave[]  = { "brave-browser", NULL };
 static const char *slock[]  = { "slock", NULL };
 
@@ -81,6 +84,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = floattermcmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = brave } },
 	{ MODKEY,                       XK_Escape, spawn,          {.v = slock } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -97,7 +101,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY|ShiftMask,             XK_Return, setlayout,      {0} },
+	{ MODKEY|ControlMask,           XK_Return, setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
