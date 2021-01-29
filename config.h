@@ -79,6 +79,7 @@ static const char *termcmd[]  = { "alacritty", NULL };
 static const char *floattermcmd[]  = { "alacritty", "-t", "floatingterminal", NULL };
 static const char *brave[]  = { "brave-browser", NULL };
 static const char *slock[]  = { "slock", NULL };
+static const char *logout[]  = { "logout.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -122,7 +123,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	//{ MODKEY|ShiftMask,           XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = logout } },
 };
 
 /* button definitions */
