@@ -21,7 +21,9 @@ static const char col_gray4[]       = "#4c566a";
 //static const char col_cyan[]        = "#005577";
 static const char col_cyan[]        = "#81a1c1";
 static const char col_red[]         = "#BF616A";
+static const char col_purple[]      = "#bd93f9";
 static const char *colors[][3]      = {
+
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_red,   col_red   },
@@ -39,6 +41,8 @@ static const Rule rules[] = {
 	/* class          instance     title               tags mask     isfloating   monitor */
     { "",               NULL,       NULL,               0,            0,           -1 },
     { "",               NULL,       "floatingterminal", 0,            1,           -1 },
+    { "",               NULL,       "pulsemixer",       0,            1,           -1 },
+    { "Pavucontrol",    NULL,       NULL,               0,            1,           -1 },
     { "Brave-browser",  NULL,       NULL,               1 << 0,       0,           -1 },
     { "",               NULL,       "Alacritty",        1 << 1,       0,           -1 },
     { "",               NULL,       "ranger",           1 << 2,       0,           -1 },
@@ -46,7 +50,7 @@ static const Rule rules[] = {
     { "Vmware",         NULL,       NULL,               1 << 6,       0,           -1 },
     { "Signal",         NULL,       NULL,               1 << 7,       0,           -1 },
     { "Spotify",        NULL,       NULL,               1 << 8,       0,           -1 },
-	//{ "Gimp",         NULL,       NULL,               0,            1,           -1 },
+		//{ "Gimp",         NULL,       NULL,               0,            1,           -1 },
     //{ "Firefox",      NULL,       NULL,               1 << 1,       0,           -1 },
     //{ "st-256color",  NULL,       NULL,               1 << 0,       0,           -1 },
     //{ "Pcmanfm",      NULL,       NULL,               1 << 2,       0,           -1 },
@@ -55,8 +59,8 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-//static const int resizehints = 1;    [> 1 means respect size hints in tiled resizals <]
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 1;    /*[> 1 means respect size hints in tiled resizals <]*/
+/*static const int resizehints = 0;    [> 1 means respect size hints in tiled resizals <]*/
 
 #include "gaplessgrid.c"
 static const Layout layouts[] = {
@@ -101,9 +105,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Escape,                 spawn,          {.v = slock } },
 	{ MODKEY,                       XK_o,                      spawn,          SHCMD("setLayout.sh us") },
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD("setLayout.sh \"-layout hu -variant qwerty\"") },
-    { 0,                            XF86XK_AudioMute,          spawn,		   SHCMD("pulsemixer --toggle-mute; pkill -RTMIN+2 dwmblocks)") },
-    { 0,                            XF86XK_AudioRaiseVolume,   spawn,		   SHCMD("pulsemixer --change-volume +3; pkill -RTMIN+2 dwmblocks)") },
-    { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pulsemixer --change-volume -3; pkill -RTMIN+2 dwmblocks)") },
+  { 0,                            XF86XK_AudioMute,          spawn,		       SHCMD("pulsemixer --toggle-mute; pkill -RTMIN+2 dwmblocks)") },
+  { 0,                            XF86XK_AudioRaiseVolume,   spawn,		       SHCMD("pulsemixer --change-volume +3; pkill -RTMIN+2 dwmblocks)") },
+  { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pulsemixer --change-volume -3; pkill -RTMIN+2 dwmblocks)") },
 	{ MODKEY,                       XK_b,                      togglebar,      {0} },
 	{ MODKEY,                       XK_j,                      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                      focusstack,     {.i = -1 } },
